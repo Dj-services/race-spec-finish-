@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery | Race Spec Finish</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#080808;
+  --dark:#111;
+  --dark2:#181818;
+  --gray:#222;
+  --gray2:#2e2e2e;
+  --mid:#777;
+  --white:#f4f4f0;
+  --gold:#c9a84c;
+  --gold-light:#e8c97a;
+  --gold-dim:rgba(201,168,76,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Montserrat',sans-serif;overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--black);}
+::-webkit-scrollbar-thumb{background:var(--gold);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:72px;background:rgba(8,8,8,0.97);border-bottom:1px solid rgba(201,168,76,0.12);}
+.nav-logo{display:flex;flex-direction:column;line-height:1;text-decoration:none;}
+.nav-logo .l1{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;letter-spacing:4px;color:var(--white);}
+.nav-logo .l2{font-size:0.45rem;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-top:2px;}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{color:rgba(244,244,240,0.6);text-decoration:none;font-size:0.7rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;transition:color .25s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{color:var(--gold);border:1px solid var(--gold);padding:9px 20px;font-size:0.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .25s;}
+.nav-cta:hover{background:var(--gold);color:var(--black);}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.burger span{width:22px;height:1px;background:var(--white);}
+@media(max-width:820px){.nav-links,.nav-cta{display:none;}.burger{display:flex;}}
+.mob-nav{display:none;position:fixed;top:72px;left:0;right:0;background:var(--dark);z-index:998;padding:20px 6% 28px;border-bottom:1px solid rgba(201,168,76,0.2);}
+.mob-nav.open{display:block;}
+.mob-nav a{display:block;padding:14px 0;color:rgba(244,244,240,0.7);text-decoration:none;font-size:0.78rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid var(--gray);}
+.mob-call{background:var(--gold)!important;color:var(--black)!important;text-align:center;margin-top:16px;}
+
+/* PAGE HEADER */
+.page-header{padding:140px 6% 80px;background:var(--dark);border-bottom:1px solid rgba(201,168,76,0.1);}
+.sec-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+.sec-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);}
+.sec-eyebrow span{font-size:0.62rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5vw,5rem);font-weight:300;line-height:1;letter-spacing:-0.5px;}
+.sec-title em{font-style:italic;color:var(--gold);}
+.back-link{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:0.68rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(244,244,240,0.4);text-decoration:none;transition:color .2s;}
+.back-link:hover{color:var(--gold);}
+.back-link::before{content:'←';}
+
+/* GALLERY GRID */
+.gallery-page{padding:60px 6% 100px;}
+.gal-full-grid{columns:3;gap:4px;}
+@media(max-width:900px){.gal-full-grid{columns:2;}}
+@media(max-width:500px){.gal-full-grid{columns:1;}}
+.gal-item{break-inside:avoid;margin-bottom:4px;position:relative;overflow:hidden;cursor:pointer;}
+.gal-item img{width:100%;display:block;transition:transform .5s ease,filter .4s ease;}
+.gal-item:hover img{transform:scale(1.04);filter:brightness(0.6);}
+.gal-item-label{position:absolute;bottom:0;left:0;right:0;padding:20px 16px;background:linear-gradient(transparent,rgba(8,8,8,0.9));transform:translateY(100%);transition:transform .4s ease;z-index:2;}
+.gal-item:hover .gal-item-label{transform:none;}
+.gal-item-label span{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);}
+
+/* CTA STRIP */
+.gal-cta{background:var(--dark2);padding:80px 6%;text-align:center;border-top:1px solid rgba(201,168,76,0.1);}
+.gal-cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;margin-bottom:12px;}
+.gal-cta h2 em{font-style:italic;color:var(--gold);}
+.gal-cta p{font-size:0.75rem;color:rgba(244,244,240,0.4);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:32px;}
+.btn-gold{background:var(--gold);color:var(--black);padding:16px 36px;font-size:0.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;text-decoration:none;transition:all .25s;display:inline-block;}
+.btn-gold:hover{background:var(--gold-light);}
+
+/* FOOTER */
+footer{background:var(--dark);border-top:1px solid rgba(201,168,76,0.1);padding:40px 6% 24px;}
+.fb-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.fb-bottom p{font-size:0.65rem;color:rgba(244,244,240,0.2);letter-spacing:1px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="l1">Race Spec</div>
+    <div class="l2">Finish &nbsp;&#9670;&nbsp; Premium Auto Detailing</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="index.html#hours">Hours</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="tel:9164724544" class="nav-cta">Book Now</a>
+  <div class="burger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mob-nav" id="mobNav">
+  <a href="index.html#about">About</a>
+  <a href="index.html#services">Services</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="index.html#hours">Hours</a>
+  <a href="index.html#contact">Contact</a>
+  <a href="tel:9164724544" class="mob-call">&#128222; (916) 472-4544</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="sec-eyebrow"><span>Our Work</span></div>
+  <h1 class="sec-title">The <em>Results</em></h1>
+  <a href="index.html" class="back-link">Back to Home</a>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery-page">
+  <div class="gal-full-grid">
+    <div class="gal-item">
+      <img src="https://images.pexels.com/photos/6873087/pexels-photo-6873087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Exterior Detail">
+      <div class="gal-item-label"><span>Exterior Detail</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.pexels.com/photos/9462328/pexels-photo-9462328.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ceramic Coating">
+      <div class="gal-item-label"><span>Ceramic Coating</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.pexels.com/photos/7368240/pexels-photo-7368240.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Paint Correction">
+      <div class="gal-item-label"><span>Paint Correction</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.pexels.com/photos/6873086/pexels-photo-6873086.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Interior Detail">
+      <div class="gal-item-label"><span>Interior Detail</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.pexels.com/photos/7368244/pexels-photo-7368244.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Race Spec Finish">
+      <div class="gal-item-label"><span>Race Spec Finish</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.pexels.com/photos/7368236/pexels-photo-7368236.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Full Detail">
+      <div class="gal-item-label"><span>Full Detail</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.pexels.com/photos/6873084/pexels-photo-6873084.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Wheel Detail">
+      <div class="gal-item-label"><span>Wheel Detail</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.pexels.com/photos/7368242/pexels-photo-7368242.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Polish & Buff">
+      <div class="gal-item-label"><span>Polish &amp; Buff</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.pexels.com/photos/9462327/pexels-photo-9462327.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Showroom Finish">
+      <div class="gal-item-label"><span>Showroom Finish</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="gal-cta">
+  <h2>Ready for Your <em>Transformation?</em></h2>
+  <p>Call or text us to book your detail today</p>
+  <a href="tel:9164724544" class="btn-gold">Book Your Detail &mdash; (916) 472-4544</a>
+</div>
+
+<footer>
+  <div class="fb-bottom">
+    <p>&copy; 2025 Race Spec Finish. All rights reserved.</p>
+    <p><a href="tel:9164724544" style="color:var(--gold);text-decoration:none;">(916) 472-4544</a></p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){document.getElementById('mobNav').classList.toggle('open');}
+</script>
+</body>
+</html>
